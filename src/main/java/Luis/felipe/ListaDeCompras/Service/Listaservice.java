@@ -17,13 +17,23 @@ public class Listaservice {
     }
 
     //MOSTRAR LISTA
-    public List<Lista> lista (){
+    public List<Lista> getLista (){
         return listarepository.findAll();
     }
 
     //Add item na lista
     public Lista addItem(Lista lista){
         return listarepository.save(lista);/*Lista seria um Item e não uma lista*/
+    }
+
+    //Deletar item
+    public void delete(Long id){
+        listarepository.deleteById(id);
+    }
+
+    //Deletar lista/Tabela
+    public void deleteall(){
+        listarepository.deleteAll();
     }
 
 }

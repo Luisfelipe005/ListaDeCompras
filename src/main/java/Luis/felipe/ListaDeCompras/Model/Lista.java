@@ -1,11 +1,9 @@
 package Luis.felipe.ListaDeCompras.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "Lista_Comidas")
 public class Lista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
