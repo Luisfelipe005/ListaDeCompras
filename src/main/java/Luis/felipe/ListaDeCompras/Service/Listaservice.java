@@ -38,15 +38,15 @@ public class Listaservice {
     }
 
     //Atualizarlista
-    public Lista atualizalista(Lista lista, Long id){
-        Optional<Lista> optionalT = listarepository.findById(id);
-        if(optionalT.isPresent()){
-           Lista list = optionalT.get();
-            list.setItem(lista.getItem());
-            list.setQuantidade(lista.getQuantidade());
-            return listarepository.save(list);
-        }
-        return null;
-    }
+    public Lista atualizaLista(Lista lista, Long id){
+        Optional<Lista> optionalLista = listarepository.findById(id);
 
+        if(!optionalLista.isPresent()) {
+            throw new RuntimeException("Item do id: " + id + " não encontrado!");
+        }
+        Lista lista1 = optionalLista.get();
+        lista1.setItem(lista.getItem());
+        lista1.setQuantidade(lista.getQuantidade());
+        return listarepository.save(lista1);
+    }
 }

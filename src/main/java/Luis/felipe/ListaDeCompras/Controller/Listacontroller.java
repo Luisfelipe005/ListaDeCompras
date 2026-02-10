@@ -35,9 +35,6 @@ public class Listacontroller {
         listaservice.deleteall();
     }
 
-    @PutMapping("/{id}")
-    public Lista atualizalista(@PathVariable Long id, @RequestBody Lista item){
-        return listaservice.atualizalista(item, id);
 
     }
 
