@@ -5,6 +5,7 @@ import Luis.felipe.ListaDeCompras.Repository.Listarepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Listaservice {
@@ -34,6 +35,18 @@ public class Listaservice {
     //Deletar lista/Tabela
     public void deleteall(){
         listarepository.deleteAll();
+    }
+
+    //Atualizarlista
+    public Lista atualizalista(Lista lista, Long id){
+        Optional<Lista> optionalT = listarepository.findById(id);
+        if(optionalT.isPresent()){
+           Lista list = optionalT.get();
+            list.setItem(lista.getItem());
+            list.setQuantidade(lista.getQuantidade());
+            return listarepository.save(list);
+        }
+        return null;
     }
 
 }

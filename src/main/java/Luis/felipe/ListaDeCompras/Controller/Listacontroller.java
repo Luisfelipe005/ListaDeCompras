@@ -21,7 +21,7 @@ public class Listacontroller {
     }
 
     @PostMapping
-    public Lista addlista(Lista item){
+    public Lista addlista(@RequestBody Lista item){
         return listaservice.addItem(item);
     }
 
@@ -33,6 +33,12 @@ public class Listacontroller {
     @DeleteMapping
     public void deleteall(){
         listaservice.deleteall();
+    }
+
+    @PutMapping("/{id}")
+    public Lista atualizalista(@PathVariable Long id, @RequestBody Lista item){
+        return listaservice.atualizalista(item, id);
+
     }
 
 }
