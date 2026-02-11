@@ -10,14 +10,24 @@ public class Lista {
     private Long id;
     private String item;
     private Integer quantidade;
+    private Boolean comprado;
 
     public Lista(Long id, String item, Integer quantidade) {
         this.id = id;
         this.item = item;
         this.quantidade = quantidade;
+        this.comprado = false;
     }
 
     public Lista() {
+    }
+
+    public Boolean getComprado() {
+        return comprado;
+    }
+
+    public void setComprado(Boolean comprado) {
+        this.comprado = comprado;
     }
 
     public String getItem() {

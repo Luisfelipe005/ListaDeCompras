@@ -2,6 +2,7 @@ package Luis.felipe.ListaDeCompras.Controller;
 
 import Luis.felipe.ListaDeCompras.Model.Lista;
 import Luis.felipe.ListaDeCompras.Service.Listaservice;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class Listacontroller {
     }
 
     @GetMapping
-    public List<Lista> mostrarlista(){
-        return listaservice.getLista();
+        public ResponseEntity <List<Lista>> mostrarlista(){
+            return ResponseEntity.ok().body(listaservice.getLista());
     }
 
     @PostMapping
@@ -35,7 +36,14 @@ public class Listacontroller {
         listaservice.deleteall();
     }
 
+    @PutMapping("/{id}")
+    public Lista atualiza(@RequestBody Lista lista, @PathVariable Long id){
+       return listaservice.atualizaLista(lista, id);
+    }
 
+    @PatchMapping("/{id}")
+    public void marcarComprado(@PathVariable Long id){
+        listaservice.marcaComprado(id);
     }
 
 }
