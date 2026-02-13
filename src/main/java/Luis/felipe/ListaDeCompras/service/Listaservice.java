@@ -1,8 +1,8 @@
-package Luis.felipe.ListaDeCompras.Service;
+package Luis.felipe.ListaDeCompras.service;
 
-import Luis.felipe.ListaDeCompras.Model.Lista;
-import Luis.felipe.ListaDeCompras.Repository.Listarepository;
-import Luis.felipe.ListaDeCompras.exception.ItemNaoEncontrado;
+import Luis.felipe.ListaDeCompras.model.Lista;
+import Luis.felipe.ListaDeCompras.repository.Listarepository;
+import Luis.felipe.ListaDeCompras.exception.ItemNaoEncontradoException;
 import Luis.felipe.ListaDeCompras.exception.RequisicaoInvalidaException;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,13 @@ public class Listaservice {
     public List<Lista> getLista (){
         return listarepository.findAll();
     }
+    //Buscar por nome
+    public List<Lista> listaPorNome(String item){
+        if(listarepository.findByItemContainsIgnoreCase(item).isEmpty()){
+            throw new ItemNaoEncontradoException("Item não encontrado na lista");
+        }
+      return listarepository.findByItemContainsIgnoreCase(item);
+    }
 
     //Add item na lista
     public Lista addItem(Lista lista){
@@ -39,7 +46,7 @@ public class Listaservice {
     public void delete(Long id){
         Optional<Lista> listaOptional = listarepository.findById(id);
         if(listaOptional.isEmpty()){
-            throw new ItemNaoEncontrado("Item não foi encontrado!");
+            throw new ItemNaoEncontradoException("Item não foi encontrado!");
         }
          listarepository.deleteById(id);
     }
@@ -54,7 +61,7 @@ public class Listaservice {
         Optional<Lista> optionalLista = listarepository.findById(id);
 
         if(!optionalLista.isPresent()) {
-            throw new ItemNaoEncontrado("Item não foi encontrado!");
+            throw new ItemNaoEncontradoException("Item não foi encontrado!");
         }
         Lista lista1 = optionalLista.get();
         lista1.setItem(lista.getItem());
@@ -69,7 +76,7 @@ public class Listaservice {
     public void marcaComprado(Long id){
         Optional<Lista> optionalLista = listarepository.findById(id);
         if (optionalLista.isEmpty()){
-            throw new ItemNaoEncontrado("Item não foi encontrado!");
+            throw new ItemNaoEncontradoException("Item não foi encontrado!");
         }
         Lista lista1 = optionalLista.get();
         if (!lista1.getComprado()){

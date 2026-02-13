@@ -1,7 +1,7 @@
-package Luis.felipe.ListaDeCompras.Controller;
+package Luis.felipe.ListaDeCompras.controller;
 
-import Luis.felipe.ListaDeCompras.Model.Lista;
-import Luis.felipe.ListaDeCompras.Service.Listaservice;
+import Luis.felipe.ListaDeCompras.model.Lista;
+import Luis.felipe.ListaDeCompras.service.Listaservice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +14,11 @@ public class Listacontroller {
 
     public Listacontroller(Listaservice listaservice) {
         this.listaservice = listaservice;
+    }
+
+    @GetMapping("/buscar")
+    public List<Lista> buscaPorNome(@RequestParam String item){
+        return listaservice.listaPorNome(item);
     }
 
     @GetMapping

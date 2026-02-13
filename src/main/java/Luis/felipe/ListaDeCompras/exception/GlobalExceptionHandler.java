@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(ItemNaoEncontrado.class)
-    public ResponseEntity<String> itemnaoencontrado(ItemNaoEncontrado itemNaoEncontrado){
+    @ExceptionHandler(ItemNaoEncontradoException.class)
+    public ResponseEntity<String> itemnaoencontrado(ItemNaoEncontradoException itemNaoEncontrado){
         return ResponseEntity.status(404).body(itemNaoEncontrado.getMessage());
     }
 

@@ -1,4 +1,4 @@
-package Luis.felipe.ListaDeCompras.Model;
+package Luis.felipe.ListaDeCompras.model;
 
 import jakarta.persistence.*;
 
